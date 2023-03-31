@@ -126,12 +126,9 @@ class DayColumn extends React.Component {
 
     const DayColumnWrapperComponent =
       components.dayColumnWrapper || DayColumnWrapper
-
     return (
       <DayColumnWrapperComponent
         ref={this.containerRef}
-        date={date}
-        style={style}
         className={clsx(
           className,
           'rbc-day-slot',
@@ -140,7 +137,6 @@ class DayColumn extends React.Component {
           isNow && 'rbc-today', // WHY
           selecting && 'rbc-slot-selecting'
         )}
-        slotMetrics={slotMetrics}
       >
         {slotMetrics.groups.map((grp, idx) => (
           <TimeSlotGroup

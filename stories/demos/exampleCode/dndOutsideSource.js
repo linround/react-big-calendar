@@ -168,7 +168,7 @@ export default function DnDOutsideResource({ localizer }) {
       <div className="height600">
         <DragAndDropCalendar
           defaultDate={defaultDate}
-          defaultView={Views.MONTH}
+          defaultView={Views.DAY}
           dragFromOutsideItem={
             displayDragItemInCell ? dragFromOutsideItem : null
           }
