@@ -126,45 +126,7 @@ export default function DnDOutsideResource({ localizer }) {
 
   return (
     <Fragment>
-      <DemoLink fileName="dndOutsideSource">
-        <Card className="dndOutsideSourceExample">
-          <div className="inner">
-            <h4>Outside Drag Sources</h4>
-            <p>
-              Lighter colored events, in the Calendar, have an `isDraggable` key
-              of `false`.
-            </p>
-            {Object.entries(counters).map(([name, count]) => (
-              <div
-                draggable="true"
-                key={name}
-                onDragStart={() =>
-                  handleDragStart({ title: formatName(name, count), name })
-                }
-              >
-                {formatName(name, count)}
-              </div>
-            ))}
-            <div
-              draggable="true"
-              onDragStart={() => handleDragStart('undroppable')}
-            >
-              Draggable but not for calendar.
-            </div>
-          </div>
 
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={displayDragItemInCell}
-                onChange={handleDisplayDragItemInCell}
-              />
-              Display dragged item in cell while dragging over
-            </label>
-          </div>
-        </Card>
-      </DemoLink>
       <div className="height600">
         <DragAndDropCalendar
           defaultDate={defaultDate}

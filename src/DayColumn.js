@@ -116,7 +116,6 @@ class DayColumn extends React.Component {
       getters: { dayProp, ...getters },
       components: { eventContainerWrapper: EventContainer, ...components },
     } = this.props
-
     let { slotMetrics } = this
     let { selecting, top, height, startDate, endDate } = this.state
 

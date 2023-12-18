@@ -127,15 +127,29 @@ class EventContainerWrapper extends React.Component {
   }
 
   updateParentScroll = (parent, node) => {
+    console.log('updateParentScroll',parent,node)
     setTimeout(() => {
+      // todo 关于 qsa 的内部调用
+      // node.querySelectorAll(selector)
       const draggedEl = qsa(node, '.rbc-addons-dnd-drag-preview')[0]
       if (draggedEl) {
         if (draggedEl.offsetTop < parent.scrollTop) {
+
+          // todo 向上滚动时
+          // 拖拽的元素距离顶部的高度 小于 容易滚动的位置
+          // 将滚动位置 设置为拖拽元素的 位置处
+          console.log(parent,draggedEl.offsetTop)
           scrollTop(parent, Math.max(draggedEl.offsetTop, 0))
         } else if (
           draggedEl.offsetTop + draggedEl.offsetHeight >
           parent.scrollTop + parent.clientHeight
         ) {
+
+          // todo 向下滚动时
+          // draggedEl.offsetTop + draggedEl.offsetHeight  可以得知拖拽的元素的底部 距离容器的位置
+          // parent.scrollTop + parent.clientHeight 可以得知 容器顶部到当前底部的距离
+
+          // 从这里可以得知 拖拽元素的底部 已经超出了当前容器的底部
           scrollTop(
             parent,
             Math.min(
@@ -161,7 +175,6 @@ class EventContainerWrapper extends React.Component {
 
     selector.on('beforeSelect', (point) => {
       const { dragAndDropAction } = this.context.draggable
-
       if (!dragAndDropAction.action) return false
       if (dragAndDropAction.action === 'resize') {
         return pointInColumn(getBoundsForNode(node), point)

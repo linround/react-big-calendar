@@ -189,6 +189,7 @@ class Selection {
   // future event handling based on the type of event.
   _addInitialEventListener() {
     const removeMouseDownListener = addEventListener('mousedown', (e) => {
+
       this._removeInitialEventListener()
       this._handleInitialEvent(e)
       this._removeInitialEventListener = addEventListener(
@@ -245,7 +246,6 @@ class Selection {
     let node = this.container(),
       collides,
       offsetData
-
     // Right clicks
     if (
       e.which === 3 ||
@@ -253,7 +253,6 @@ class Selection {
       !isOverContainer(node, clientX, clientY)
     )
       return
-
     if (!this.globalMouse && node && !contains(node, e.target)) {
       let { top, left, bottom, right } = normalizeDistance(0)
 
@@ -271,7 +270,6 @@ class Selection {
 
       if (!collides) return
     }
-
     let result = this.emit(
       'beforeSelect',
       (this._initialEventData = {

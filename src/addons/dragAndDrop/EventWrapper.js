@@ -39,6 +39,7 @@ class EventWrapper extends React.Component {
     this.context.draggable.onBeginAction(this.props.event, 'resize', 'RIGHT')
   }
   handleStartDragging = (e) => {
+    console.log('handleStartDragging')
     if (e.button !== 0) return
     // hack: because of the way the anchors are arranged in the DOM, resize
     // anchor events will bubble up to the move anchor listener. Don't start
@@ -141,7 +142,9 @@ class EventWrapper extends React.Component {
         }
 
         newProps.children = (
-          <div className="rbc-addons-dnd-resizable">
+          <div className="rbc-addons-dnd-resizable" style={{
+            background:'red'
+          }}>
             {StartAnchor}
             {children.props.children}
             {EndAnchor}

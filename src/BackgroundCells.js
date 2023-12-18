@@ -44,7 +44,7 @@ class BackgroundCells extends React.Component {
     let current = getNow()
 
     return (
-      <div className="rbc-row-bg" ref={this.containerRef}>
+      <div className="rbc-row-bg"  ref={this.containerRef}>
         {range.map((date, index) => {
           let selected = selecting && index >= startIdx && index <= endIdx
           const { className, style } = getters.dayProp(date)
@@ -72,9 +72,7 @@ class BackgroundCells extends React.Component {
 
   _selectable() {
     let node = this.containerRef.current
-    let selector = (this._selector = new Selection(this.props.container, {
-      longPressThreshold: this.props.longPressThreshold,
-    }))
+    let selector = (this._selector = new Selection(this.props.container, ))
 
     let selectorClicksHandler = (point, actionType) => {
       if (!isEvent(node, point) && !isShowMore(node, point)) {
@@ -99,7 +97,6 @@ class BackgroundCells extends React.Component {
 
     selector.on('selecting', (box) => {
       let { range, rtl } = this.props
-
       let startIdx = -1
       let endIdx = -1
 
@@ -126,8 +123,6 @@ class BackgroundCells extends React.Component {
     })
 
     selector.on('beforeSelect', (box) => {
-      if (this.props.selectable !== 'ignoreEvents') return
-
       return !isEvent(this.containerRef.current, box)
     })
 

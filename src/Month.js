@@ -27,7 +27,7 @@ class MonthView extends React.Component {
 
     this.state = {
       rowLimit: 5,
-      needLimitMeasure: true,
+      needLimitMeasure: false,
       date: null,
     }
     this.containerRef = createRef()
@@ -93,7 +93,6 @@ class MonthView extends React.Component {
           {this.renderHeaders(weeks[0])}
         </div>
         {weeks.map(this.renderWeek)}
-        {this.props.popup && this.renderOverlay()}
       </div>
     )
   }

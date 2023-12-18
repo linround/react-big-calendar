@@ -72,14 +72,17 @@ export default function withDragAndDrop(Calendar) {
     handleBeginAction = (event, action, direction) => {
       this.setState({ event, action, direction })
       const { onDragStart } = this.props
+      // console.log('onDragStart:',onDragStart)
       if (onDragStart) onDragStart({ event, action, direction })
     }
 
     handleInteractionStart = () => {
+      // console.log('handleInteractionStart')
       if (this.state.interacting === false) this.setState({ interacting: true })
     }
 
     handleInteractionEnd = (interactionInfo) => {
+      // console.log('handleInteractionEnd')
       const { action, event } = this.state
       if (!action) return
 
