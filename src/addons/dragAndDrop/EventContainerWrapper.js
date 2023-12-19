@@ -140,8 +140,9 @@ class EventContainerWrapper extends React.Component {
           // todo 向上滚动时
           // 拖拽的元素距离顶部的高度 小于 容器滚动的位置
           // 将滚动位置 设置为拖拽元素的 位置处
-          console.log(parent,draggedEl.offsetTop)
-          scrollTop(parent, Math.max(draggedEl.offsetTop, 0))
+          // console.log(parent,draggedEl.offsetTop)
+          // 这里是直接设置了 scrollTop
+          scrollTop(parent, Math.max(draggedEl.offsetTop-10, 0))
         } else if (
           draggedEl.offsetTop + draggedEl.offsetHeight >
           parent.scrollTop + parent.clientHeight
@@ -155,12 +156,14 @@ class EventContainerWrapper extends React.Component {
           // 元素的顶部高度 + 元素自身的高度 - 父元素的高度
           // 即可得到需要滚动的距离
           const value = draggedEl.offsetTop+draggedEl.offsetHeight -parent.offsetHeight
+
+          console.log(value)
           scrollTop(
             parent,
             Math.min(
               draggedEl.offsetTop - // 拖拽元素距离容器顶部的高度
                 parent.offsetHeight + // 父元素自身的高度
-                draggedEl.offsetHeight, // 子元素自身的高度
+                draggedEl.offsetHeight+10, // 子元素自身的高度
               parent.scrollHeight // 父元素整个内部可滚动的高度
             )
           )
