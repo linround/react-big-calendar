@@ -127,16 +127,18 @@ class EventContainerWrapper extends React.Component {
   }
 
   updateParentScroll = (parent, node) => {
-    console.log('updateParentScroll',parent,node)
     setTimeout(() => {
       // todo 关于 qsa 的内部调用
       // node.querySelectorAll(selector)
       const draggedEl = qsa(node, '.rbc-addons-dnd-drag-preview')[0]
+
+      // parent 父容器
+      // draggedEl 拖拽的 DOM节点
       if (draggedEl) {
         if (draggedEl.offsetTop < parent.scrollTop) {
 
           // todo 向上滚动时
-          // 拖拽的元素距离顶部的高度 小于 容易滚动的位置
+          // 拖拽的元素距离顶部的高度 小于 容器滚动的位置
           // 将滚动位置 设置为拖拽元素的 位置处
           console.log(parent,draggedEl.offsetTop)
           scrollTop(parent, Math.max(draggedEl.offsetTop, 0))
@@ -150,13 +152,16 @@ class EventContainerWrapper extends React.Component {
           // parent.scrollTop + parent.clientHeight 可以得知 容器顶部到当前底部的距离
 
           // 从这里可以得知 拖拽元素的底部 已经超出了当前容器的底部
+          // 元素的顶部高度 + 元素自身的高度 - 父元素的高度
+          // 即可得到需要滚动的距离
+          const value = draggedEl.offsetTop+draggedEl.offsetHeight -parent.offsetHeight
           scrollTop(
             parent,
             Math.min(
-              draggedEl.offsetTop -
-                parent.offsetHeight +
-                draggedEl.offsetHeight,
-              parent.scrollHeight
+              draggedEl.offsetTop - // 拖拽元素距离容器顶部的高度
+                parent.offsetHeight + // 父元素自身的高度
+                draggedEl.offsetHeight, // 子元素自身的高度
+              parent.scrollHeight // 父元素整个内部可滚动的高度
             )
           )
         }
